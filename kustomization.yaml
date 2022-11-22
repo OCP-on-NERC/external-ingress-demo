@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: external-ingress-demo
+commonLabels:
+  app: external-ingress-demo
+
+resources:
+  - namespace.yaml
+  - example1
+  - example2
+
+configurations:
+  - nameReference.yaml

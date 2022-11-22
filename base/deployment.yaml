@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: external-ingress-demo
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - image: docker.io/alpinelinux/darkhttpd
+          name: webserver
+          ports:
+            - name: http
+              protocol: TCP
+              containerPort: 8080
+          volumeMounts:
+            - name: content
+              mountPath: /var/www/localhost/htdocs
+      volumes:
+        - name: content
+          configMap:
+            name: demo-content
